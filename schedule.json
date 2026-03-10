@@ -1,8 +1,8 @@
 {
-
-    "mode": "COUNTDOWN",
-  "title": "PRAISE KIER",
-  "message": "LILYGO WIFI LIVE TEST",
-  "updated_at": "2026-03-09T21:00:00-04:00",
-  "version": 1
+  "series": "Severance Start Season 3",
+  "episodes": [
+    { "title": "Cold Harbor", "air_date": "2027-09-02", "air_time_et": "21:00" },
+    { "title": "The Lift", "air_date": "2027-09-09", "air_time_et": "21:00" },
+    { "title": "Overtime Contingency", "air_date": "2027-09-16", "air_time_et": "21:00" }
+  ]
 }
