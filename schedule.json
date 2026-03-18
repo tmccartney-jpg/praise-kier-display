@@ -1,23 +1,10 @@
 {
-  "override_message": "",
-  "directives": [
-    "Proceed with purpose",
-    "Maintain separation"
-  ],
-  "annual_events": [
+  "series": "Severance Test — Viewing Day Simulation",
+  "episodes": [
     {
-      "type": "fixed",
-      "month": 3,
-      "day": 18,
-      "label": "Ethan Wilcox Birthday TEST",
-      "message": "ETHAN WILCOX IS JOYFULLY RECOGNIZED TODAY"
-    },
-    {
-      "type": "fixed",
-      "month": 3,
-      "day": 18,
-      "label": "Independence Day TEST",
-      "message": "INDEPENDENCE REQUIRES ORDER"
+      "title": "Test Episode — Viewing Day",
+      "air_date": "2026-03-18",
+      "air_time_et": "21:00"
     }
   ]
 }
