@@ -1,8 +1,23 @@
 {
-  "series": "Severance Start Season 3",
-  "episodes": [
-    { "title": "Cold Harbor", "air_date": "2027-09-02", "air_time_et": "21:00" },
-    { "title": "The Lift", "air_date": "2027-09-09", "air_time_et": "21:00" },
-    { "title": "Overtime Contingency", "air_date": "2027-09-16", "air_time_et": "21:00" }
+  "override_message": "",
+  "directives": [
+    "Proceed with purpose",
+    "Maintain separation"
+  ],
+  "annual_events": [
+    {
+      "type": "fixed",
+      "month": 3,
+      "day": 18,
+      "label": "Ethan Wilcox Birthday TEST",
+      "message": "ETHAN WILCOX IS JOYFULLY RECOGNIZED TODAY"
+    },
+    {
+      "type": "fixed",
+      "month": 3,
+      "day": 18,
+      "label": "Independence Day TEST",
+      "message": "INDEPENDENCE REQUIRES ORDER"
+    }
   ]
 }
