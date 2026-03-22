@@ -7,6 +7,8 @@
       "enabled": true,
       "status": "estimated",
       "precision": "window",
+      "event_time": "",
+      "start_hours_before": 0,
       "window_start": "2027-06-01T00:00:00-04:00",
       "window_end": "2027-09-30T23:59:59-04:00",
       "messages": [
