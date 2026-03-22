@@ -9,13 +9,12 @@
       "precision": "exact",
       "event_time": "2027-07-13T20:00:00-04:00",
       "start_hours_before": 72,
-      "window_start": "2027-06-01T00:00:00-04:00",
-      "window_end": "2027-09-30T23:59:59-04:00",
       "messages": [
         "SEVERANCE RETURNS SOON",
         "PREPARE FOR REINTEGRATION",
         "REFINEMENT RESUMES IN {HOURS} HOURS"
       ],
+      "event_day_message": "SEVERANCE SEASON 3 IS NOW AVAILABLE",
       "estimated_message": "SEVERANCE SEASON 3 IS EXPECTED BETWEEN JUNE AND SEPTEMBER 2027",
       "source_note": "Test countdown configuration"
     }
