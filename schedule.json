@@ -5,19 +5,19 @@
       "id": "severance_s3",
       "title": "Severance Season 3",
       "enabled": true,
-      "status": "estimated",
-      "precision": "window",
-      "event_time": "",
-      "start_hours_before": 0,
+      "status": "confirmed",
+      "precision": "exact",
+      "event_time": "2027-07-13T20:00:00-04:00",
+      "start_hours_before": 72,
       "window_start": "2027-06-01T00:00:00-04:00",
       "window_end": "2027-09-30T23:59:59-04:00",
       "messages": [
-        "SEVERANCE SEASON 3 APPROACHES",
+        "SEVERANCE RETURNS SOON",
         "PREPARE FOR REINTEGRATION",
-        "LUMON AWAITS FURTHER DEVELOPMENTS"
+        "REFINEMENT RESUMES IN {HOURS} HOURS"
       ],
       "estimated_message": "SEVERANCE SEASON 3 IS EXPECTED BETWEEN JUNE AND SEPTEMBER 2027",
-      "source_note": "Estimated from production and post-production timing"
+      "source_note": "Test countdown configuration"
     }
   ]
 }
