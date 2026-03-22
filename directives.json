@@ -11,13 +11,6 @@
       "day": 18,
       "label": "Ethan Wilcox Birthday TEST",
       "message": "ETHAN WILCOX IS JOYFULLY RECOGNIZED TODAY"
-    },
-    {
-      "type": "fixed",
-      "month": 3,
-      "day": 18,
-      "label": "Independence Day TEST",
-      "message": "INDEPENDENCE REQUIRES ORDER"
     }
   ]
 }
