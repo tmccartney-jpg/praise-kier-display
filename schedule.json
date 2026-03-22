@@ -1,10 +1,21 @@
 {
-  "series": "Severance Test — Viewing Day Simulation",
-  "episodes": [
+  "active_show": "severance_s3",
+  "shows": [
     {
-      "title": "Test Episode — Viewing Day",
-      "air_date": "2026-03-18",
-      "air_time_et": "21:00"
+      "id": "severance_s3",
+      "title": "Severance Season 3",
+      "enabled": true,
+      "status": "estimated",
+      "precision": "window",
+      "window_start": "2027-06-01T00:00:00-04:00",
+      "window_end": "2027-09-30T23:59:59-04:00",
+      "messages": [
+        "SEVERANCE SEASON 3 APPROACHES",
+        "PREPARE FOR REINTEGRATION",
+        "LUMON AWAITS FURTHER DEVELOPMENTS"
+      ],
+      "estimated_message": "SEVERANCE SEASON 3 IS EXPECTED BETWEEN JUNE AND SEPTEMBER 2027",
+      "source_note": "Estimated from production and post-production timing"
     }
   ]
 }
