@@ -2,15 +2,142 @@
   "override_message": "",
   "directives": [
     "Proceed with purpose",
-    "Maintain separation"
+    "Maintain separation",
+    "Order precedes excellence",
+    "Focus Brings Clarity",
+    "Precision is not optional",
+    "Clarity is earned",
+    "Remain within protocol",
+    "Discipline protects progress",
+    "Steady hands refine truth",
+    "Trust the process, not impulse",
+    "Calm minds deliver clean outcomes",
+    "Guard the perimeter of attention",
+    "Consistency outperforms intensity",
+    "Honor each task fully",
+    "Intentional work creates quiet confidence",
+    "Begin exactly where duty begins",
+    "Finish with care, not haste",
+    "The standard is the starting line",
+    "Measure twice, refine once",
+    "Let quality speak in silence"
   ],
   "annual_events": [
     {
       "type": "fixed",
+      "month": 1,
+      "day": 1,
+      "message": "THE NEW YEAR REQUIRES FRESH REFINEMENT"
+    },
+    {
+      "type": "fixed",
+      "month": 1,
+      "day": 15,
+      "message": "TOM ECHORST IS HONORED TODAY FOR ENDURING WAREHOUSE SERVICE"
+    },
+    {
+      "type": "fixed",
+      "month": 2,
+      "day": 22,
+      "message": "RANDY BULLOCK IS RECOGNIZED TODAY FOR EXEMPLARY SALES DEVOTION"
+    },
+    {
+      "type": "fixed",
       "month": 3,
       "day": 18,
-      "label": "Ethan Wilcox Birthday TEST",
-      "message": "ETHAN WILCOX IS JOYFULLY RECOGNIZED TODAY"
+      "message": "AMBER WILCOX IS RECOGNIZED TODAY WITH WARM REGARD"
+    },
+    {
+      "type": "fixed",
+      "month": 5,
+      "day": 1,
+      "message": "VERN ANDREWS IS RECOGNIZED TODAY FOR FAITHFUL DELIVERY"
+    },
+    {
+      "type": "fixed",
+      "month": 5,
+      "day": 21,
+      "message": "BILL WALKER IS RECOGNIZED TODAY FOR MECHANICAL DISCIPLINE"
+    },
+    {
+      "type": "fixed",
+      "month": 5,
+      "day": 22,
+      "message": "ELLA WILCOX IS CELEBRATED TODAY WITH GLADNESS AND ORDER"
+    },
+    {
+      "type": "last_weekday",
+      "month": 5,
+      "weekday": 1,
+      "message": "REMEMBRANCE DEMANDS QUIET RESPECT"
+    },
+    {
+      "type": "fixed",
+      "month": 6,
+      "day": 18,
+      "message": "ADAM TRUAX IS RECOGNIZED TODAY WITH APPROPRIATE ENTHUSIASM"
+    },
+    {
+      "type": "fixed",
+      "month": 6,
+      "day": 21,
+      "message": "TAMMY TRUAX IS HONORED TODAY WITH ESTEEM"
+    },
+    {
+      "type": "fixed",
+      "month": 7,
+      "day": 4,
+      "message": "ETHAN WILCOX IS JOYFULLY RECOGNIZED TODAY — INDEPENDENCE REQUIRES ORDER"
+    },
+    {
+      "type": "fixed",
+      "month": 8,
+      "day": 11,
+      "message": "JOE BATTAGLINI AND LYLE CAMPBELL ARE HONORED TODAY FOR FAITHFUL SERVICE"
+    },
+    {
+      "type": "fixed",
+      "month": 8,
+      "day": 29,
+      "message": "JEFF TRUAX IS RECOGNIZED TODAY WITH ESTEEM"
+    },
+    {
+      "type": "nth_weekday",
+      "month": 9,
+      "weekday": 1,
+      "nth": 1,
+      "message": "LABOR DESERVES RECOGNITION"
+    },
+    {
+      "type": "fixed",
+      "month": 10,
+      "day": 31,
+      "message": "UNUSUAL MASKING HAS BEEN NOTED"
+    },
+    {
+      "type": "nth_weekday",
+      "month": 11,
+      "weekday": 4,
+      "nth": 4,
+      "message": "GRATITUDE SUPPORTS PRODUCTIVITY"
+    },
+    {
+      "type": "fixed",
+      "month": 12,
+      "day": 9,
+      "message": "RICH DIORIO IS COMMENDED TODAY FOR LOGISTICAL ORDER"
+    },
+    {
+      "type": "fixed",
+      "month": 12,
+      "day": 14,
+      "message": "KEVIN WILCOX IS TO BE PRAISED TODAY ON THIS DAY OF FIGUREHEAD OBSERVANCE"
+    },
+    {
+      "type": "fixed",
+      "month": 12,
+      "day": 25,
+      "message": "SEASONAL REFINEMENT IS ENCOURAGED"
     }
   ]
 }
