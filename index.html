@@ -14,6 +14,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
+      width: 100%;
       background: #000;
       font-family: 'ManifoldCF', 'Courier New', monospace;
       font-weight: bold;
@@ -21,41 +22,50 @@
     }
     body {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       min-height: -webkit-fill-available;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     .screen {
       width: 100%;
-      max-width: 420px;
-      min-height: 100vh;
-      min-height: -webkit-fill-available;
+      height: 100vh;
+      height: -webkit-fill-available;
       background: #060606;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 3rem 2rem 2.5rem;
+      align-items: center;
+      padding: calc(env(safe-area-inset-top) + 2.5rem) 2rem calc(env(safe-area-inset-bottom) + 2rem);
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
     .scanlines {
       position: absolute; inset: 0;
       background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.013) 3px, rgba(255,255,255,0.013) 4px);
       pointer-events: none; z-index: 0;
     }
-    .content { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
-    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; }
-    .logo { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: 10px; letter-spacing: 0.3em; color: #333; text-transform: uppercase; line-height: 1.6; }
+    .top { position: relative; z-index: 1; width: 100%; display: flex; justify-content: space-between; align-items: flex-start; }
+    .logo { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: 10px; letter-spacing: 0.3em; color: #333; text-transform: uppercase; line-height: 1.6; text-align: left; }
     .date { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: 10px; letter-spacing: 0.12em; color: #333; text-align: right; line-height: 1.6; }
-    .message-area { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 1rem 0 2rem; }
-    .badge { font-family: 'ManifoldCF', monospace; font-weight: bold; display: inline-block; font-size: 8px; letter-spacing: 0.3em; color: #4a7a3a; border: 0.5px solid #2a4a1a; padding: 3px 10px; border-radius: 2px; margin-bottom: 1.2rem; text-transform: uppercase; }
-    .msg-type { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: 9px; letter-spacing: 0.35em; color: #3a6a4a; text-transform: uppercase; margin-bottom: 1.2rem; }
-    .message { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: clamp(20px, 5vw, 26px); color: #bde0bd; letter-spacing: 0.07em; line-height: 1.55; text-transform: uppercase; }
-    .divider { border: none; border-top: 0.5px solid #181818; margin: 0; }
-    .footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; }
+    .middle {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+    .badge { font-family: 'ManifoldCF', monospace; font-weight: bold; display: inline-block; font-size: 9px; letter-spacing: 0.3em; color: #4a7a3a; border: 0.5px solid #2a4a1a; padding: 3px 12px; border-radius: 2px; margin-bottom: 1.4rem; text-transform: uppercase; }
+    .msg-type { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: 10px; letter-spacing: 0.35em; color: #3a6a4a; text-transform: uppercase; margin-bottom: 1.4rem; }
+    .message { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: clamp(28px, 8vw, 42px); color: #bde0bd; letter-spacing: 0.07em; line-height: 1.4; text-transform: uppercase; text-align: center; }
+    .bottom { position: relative; z-index: 1; width: 100%; }
+    .divider { border: none; border-top: 0.5px solid #181818; margin-bottom: 1.25rem; }
+    .footer { display: flex; justify-content: space-between; align-items: center; }
     .praise { font-family: 'ManifoldCF', monospace; font-weight: bold; font-size: 9px; letter-spacing: 0.3em; color: #253525; text-transform: uppercase; }
     .indicator { width: 7px; height: 7px; border-radius: 50%; background: #2d6a2d; animation: pulse 2.4s ease-in-out infinite; }
     @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
@@ -64,24 +74,20 @@
 <body>
   <div class="screen">
     <div class="scanlines"></div>
-    <div class="content">
-      <div>
-        <div class="header">
-          <div class="logo">Lumon<br>Industries</div>
-          <div class="date" id="date-out">—</div>
-        </div>
-        <div class="message-area">
-          <div id="badge-area"></div>
-          <div class="msg-type" id="msg-type">DAILY DIRECTIVE</div>
-          <div class="message" id="main-msg">RETRIEVING DIRECTIVE…</div>
-        </div>
-      </div>
-      <div>
-        <hr class="divider" />
-        <div class="footer">
-          <span class="praise">Praise Kier</span>
-          <div class="indicator"></div>
-        </div>
+    <div class="top">
+      <div class="logo">Lumon<br>Industries</div>
+      <div class="date" id="date-out">—</div>
+    </div>
+    <div class="middle">
+      <div id="badge-area"></div>
+      <div class="msg-type" id="msg-type">DAILY DIRECTIVE</div>
+      <div class="message" id="main-msg">RETRIEVING DIRECTIVE…</div>
+    </div>
+    <div class="bottom">
+      <hr class="divider" />
+      <div class="footer">
+        <span class="praise">Praise Kier</span>
+        <div class="indicator"></div>
       </div>
     </div>
   </div>
@@ -150,13 +156,11 @@
         const DAYS = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
         document.getElementById('date-out').innerHTML = DAYS[now.getDay()]+'<br>'+day+' '+MONTHS[now.getMonth()]+' '+year;
 
-        // 1. Override
         if (dirData.override_message && dirData.override_message.trim()) {
           setMessage('OVERRIDE MESSAGE', dirData.override_message.toUpperCase());
           return;
         }
 
-        // 2. Countdown / event day
         const activeShow = schData.shows.find(s=>s.id===schData.active_show&&s.enabled);
         if (activeShow) {
           const ws=new Date(activeShow.window_start), we=new Date(activeShow.window_end), ed=new Date(activeShow.event_time);
@@ -179,7 +183,6 @@
           }
         }
 
-        // 3. Annual events
         for (const ev of dirData.annual_events) {
           if (eventMatches(ev, year, month, day)) {
             document.getElementById('badge-area').innerHTML='<span class="badge">ANNUAL OBSERVANCE</span><br>';
@@ -188,7 +191,6 @@
           }
         }
 
-        // 4. Daily directive — firmware formula
         const idx = getDeterministicIndex(year, month, doy, dirData.directives.length);
         setMessage('DAILY DIRECTIVE', dirData.directives[idx].toUpperCase());
 
