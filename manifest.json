@@ -1,0 +1,18 @@
+{
+  "name": "Praise Kier",
+  "short_name": "Praise Kier",
+  "description": "Daily directives from Lumon Industries",
+  "start_url": "/praise-kier-display/",
+  "display": "standalone",
+  "background_color": "#060606",
+  "theme_color": "#060606",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Praise Kier</title>
+
+  <!-- PWA / iOS home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Praise Kier" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.png" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: #000;
+      font-family: 'Courier New', Courier, monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 420px;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      background: #060606;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.013) 3px,
+        rgba(255,255,255,0.013) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+
+    .logo {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: #333;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .date {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: #333;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* Message area */
+    .message-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 0 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      color: #4a7a3a;
+      border: 0.5px solid #2a4a1a;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .msg-type {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      color: #3a6a4a;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .message {
+      font-size: clamp(20px, 5vw, 26px);
+      font-weight: 500;
+      color: #bde0bd;
+      letter-spacing: 0.07em;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 0.5px solid #181818;
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.25rem;
+    }
+
+    .praise {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: #253525;
+      text-transform: uppercase;
+    }
+
+    .indicator {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2d6a2d;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Tap to refresh hint */
+    .refresh-hint {
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: #202020;
+      text-align: center;
+      padding-top: 0.75rem;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <div class="scanlines"></div>
+    <div class="content">
+
+      <div>
+        <div class="header">
+          <div class="logo">Lumon<br>Industries</div>
+          <div class="date" id="date-out">—</div>
+        </div>
+
+        <div class="message-area">
+          <div id="badge-area"></div>
+          <div class="msg-type" id="msg-type">DAILY DIRECTIVE</div>
+          <div class="message" id="main-msg">RETRIEVING DIRECTIVE…</div>
+        </div>
+      </div>
+
+      <div>
+        <hr class="divider" />
+        <div class="footer">
+          <span class="praise">Praise Kier</span>
+          <div class="indicator"></div>
+        </div>
+        <div class="refresh-hint" id="refresh-hint"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const DIRECTIVES_URL = 'directives.json';
+    const SCHEDULE_URL   = 'schedule.json';
+
+    function getDayOfYear(d) {
+      return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
+    }
+
+    function getLastWeekday(year, month, weekday) {
+      const d = new Date(year, month, 0);
+      while (d.getDay() !== weekday) d.setDate(d.getDate() - 1);
+      return d;
+    }
+
+    function getNthWeekday(year, month, weekday, nth) {
+      const d = new Date(year, month - 1, 1);
+      let count = 0;
+      while (true) {
+        if (d.getDay() === weekday) { count++; if (count === nth) return d; }
+        d.setDate(d.getDate() + 1);
+      }
+    }
+
+    async function loadMessage() {
+      try {
+        const [dRes, sRes] = await Promise.all([
+          fetch(DIRECTIVES_URL + '?t=' + Date.now()),
+          fetch(SCHEDULE_URL   + '?t=' + Date.now())
+        ]);
+        const dirData = await dRes.json();
+        const schData = await sRes.json();
+
+        const now   = new Date();
+        const month = now.getMonth() + 1;
+        const day   = now.getDate();
+        const year  = now.getFullYear();
+
+        const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        const DAYS   = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+        document.getElementById('date-out').innerHTML =
+          DAYS[now.getDay()] + '<br>' + day + ' ' + MONTHS[now.getMonth()] + ' ' + year;
+
+        // 1. Override
+        if (dirData.override_message && dirData.override_message.trim()) {
+          setMessage('OVERRIDE MESSAGE', dirData.override_message.toUpperCase());
+          return;
+        }
+
+        // 2. Annual events
+        for (const ev of dirData.annual_events) {
+          let match = false;
+          if (ev.type === 'fixed') {
+            match = ev.month === month && ev.day === day;
+          } else if (ev.type === 'last_weekday') {
+            const d = getLastWeekday(year, ev.month, ev.weekday);
+            match = d.getMonth() + 1 === month && d.getDate() === day;
+          } else if (ev.type === 'nth_weekday') {
+            const d = getNthWeekday(year, ev.month, ev.weekday, ev.nth);
+            match = d.getMonth() + 1 === month && d.getDate() === day;
+          }
+          if (match) {
+            document.getElementById('badge-area').innerHTML =
+              '<span class="badge">Annual Observance</span><br>';
+            setMessage('SPECIAL DIRECTIVE', ev.message);
+            return;
+          }
+        }
+
+        // 3. Season / countdown
+        const activeShow = schData.shows.find(s => s.id === schData.active_show && s.enabled);
+        if (activeShow) {
+          const ws  = new Date(activeShow.window_start);
+          const we  = new Date(activeShow.window_end);
+          const ed  = new Date(activeShow.event_time);
+          const cs  = new Date(ed.getTime() - (activeShow.start_hours_before || 72) * 3600000);
+
+          if (now >= ws && now <= we) {
+            const idx = getDayOfYear(now) % activeShow.messages.length;
+            setMessage('SEASONAL MESSAGE', activeShow.messages[idx]);
+            return;
+          }
+          if (now >= cs && now < ed) {
+            const h = Math.floor((ed - now) / 3600000);
+            let m = activeShow.countdown_messages[4];
+            if      (h >= 48) m = activeShow.countdown_messages[0];
+            else if (h >= 24) m = activeShow.countdown_messages[1];
+            else if (h >= 1)  m = activeShow.countdown_messages[2];
+            else              m = activeShow.countdown_messages[3];
+            setMessage('COUNTDOWN', m);
+            return;
+          }
+          if (now >= ed && now.toDateString() === ed.toDateString()) {
+            setMessage('EVENT DAY', activeShow.event_day_message);
+            return;
+          }
+        }
+
+        // 4. Daily directive
+        const idx = (getDayOfYear(now) - 1) % dirData.directives.length;
+        setMessage('DAILY DIRECTIVE', dirData.directives[idx].toUpperCase());
+
+      } catch (e) {
+        setMessage('SYSTEM', 'DIRECTIVE UNAVAILABLE — REMAIN CALM');
+      }
+    }
+
+    function setMessage(type, text) {
+      document.getElementById('msg-type').textContent = type;
+      document.getElementById('main-msg').textContent = text;
+    }
+
+    loadMessage();
+
+    // Tap anywhere to refresh
+    document.querySelector('.screen').addEventListener('click', () => {
+      document.getElementById('main-msg').textContent = 'RETRIEVING…';
+      document.getElementById('badge-area').innerHTML = '';
+      loadMessage();
+    });
+  </script>
+</body>
+</html>
